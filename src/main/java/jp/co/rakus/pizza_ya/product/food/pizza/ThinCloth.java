@@ -57,5 +57,11 @@ public class ThinCloth extends PizzayaCloth {
 		return PRICE;
 	}
 
+
+	@Override
+	public int getSubTotalPrice() {
+		return PRICE;
+	}
+
 	
 }

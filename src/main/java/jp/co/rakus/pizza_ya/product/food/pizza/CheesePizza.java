@@ -15,7 +15,7 @@ import jp.co.rakus.pizza_ya.product.food.topping.Pepperoni;
  */
 public class CheesePizza extends Pizza {
 
-	public CheesePizza(PizzayaCloth cloth, Sauce sauce) {
+	public CheesePizza(Cloth cloth, Sauce sauce) {
 		super(cloth,sauce);
 		this.addToppings(new ArrayList<>(
 				Arrays.asList(new Cheese(),new Cheese(),new Pepperoni(),new Onion())));

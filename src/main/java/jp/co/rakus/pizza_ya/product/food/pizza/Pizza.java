@@ -54,7 +54,7 @@ public abstract class Pizza implements Food {
 	 * トッピング込みのピザ単品価格(税別)を取得する.
 	 * @return トッピング込みのピザ単品価格(税別)
 	 */
-	public int getPizzaSubTotalPrice() {
+	public int getSubTotalPrice() {
 		this.price += this.cloth.getPrice();
 		for (Topping topping : toppings) {
 			this.price += topping.getPrice();

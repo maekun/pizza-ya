@@ -41,5 +41,10 @@ public abstract class Topping implements Food {
 	
 	@Override
 	public boolean isRotten() {return this.isRotten;}
+	
+	@Override
+	public int getSubTotalPrice() {
+		return price;
+	}
 
 }
