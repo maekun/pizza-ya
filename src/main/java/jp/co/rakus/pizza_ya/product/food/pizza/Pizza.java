@@ -29,7 +29,6 @@ public abstract class Pizza implements Food {
 	/** セットのトッピング*/
 	private List<Topping> toppings;
 
-	
 	public Pizza(Cloth cloth, Sauce sauce) {
 		this.cloth = cloth;
 		this.sauce = sauce;
