@@ -1,13 +1,19 @@
 package jp.co.rakus.pizza_ya;
 
+import jp.co.rakus.pizza_ya.product.food.topping.ToppingMenu;
+
 /**
- * Hello world!
+ * pizza-yaシステム起動.
+ * @author hiroki.mae
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
+public class App {
+	public static void main(String[] args) {
+		
+		
+		ToppingMenu.open();
+		
+		
+		
+	}
 }
