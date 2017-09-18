@@ -56,8 +56,8 @@ public class Receipt {
 		printOrders(orders);
 		
 		System.out.println("===============================================");
-		System.out.println("                               小計金額 : " + this.subTotalPrice + " 円");
-		System.out.println("                               合計金額 : " + this.totalPrice + " 円");
+		System.out.println("                             小計金額 : " + this.subTotalPrice + " 円");
+		System.out.println("                             合計金額 : " + this.totalPrice + " 円");
 		System.out.println("===============================================\n");
 		System.out.println("**********またのご来店、おまちしております**********");
 		System.out.println("-----------------------------------------------\n\n\n");

@@ -7,10 +7,10 @@ package jp.co.rakus.pizza_ya.product.menu;
  */
 public enum PizzaMenu {
 	
-	CHEESE_PIZZA(0,"チーズピザ","¥1,800","チーズ * 2、ペパロニ、オニオン"),
-	PEPPERONI_PIZZA(1,"ペパロニピザ","¥1,400","チーズ、ペパロニ"),
-	SEAFOOD_PIZZA(2,"シーフードピザ","¥1,600","チーズ、エビ、イカ"),
-	VEGETABLES_PIZZA(3,"野菜ピザ","¥1,600","チーズ、トマト、オニオン");
+	CHEESE_PIZZA(1,"チーズピザ","¥1,800","チーズ * 2、ペパロニ、オニオン"),
+	PEPPERONI_PIZZA(2,"ペパロニピザ","¥1,400","チーズ、ペパロニ"),
+	SEAFOOD_PIZZA(3,"シーフードピザ","¥1,600","チーズ、エビ、イカ"),
+	VEGETABLES_PIZZA(4,"野菜ピザ","¥1,600","チーズ、トマト、オニオン");
 	
 	
 	/** 上記に挙げた定数をここから下で定義しているイメージ*/

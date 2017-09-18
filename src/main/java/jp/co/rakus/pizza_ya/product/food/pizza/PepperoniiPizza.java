@@ -14,10 +14,10 @@ import jp.co.rakus.pizza_ya.product.food.topping.Pepperoni;
  */
 public class PepperoniiPizza extends Pizza {
 
-	public PepperoniiPizza(PizzayaCloth cloth, Sauce sauce) {
+	public PepperoniiPizza(Cloth cloth, Sauce sauce) {
 		super(cloth,sauce);
 		this.setName("ペパロニピザ");
-		this.addToppings(new ArrayList<>(
+		this.setDefaultToppings(new ArrayList<>(
 				Arrays.asList(new Cheese(),new Pepperoni())));
 		setPriceByClothAndDefaultToppings(); 
 	}

@@ -32,6 +32,7 @@ public class Employee extends Human {
 		super(randomName());
 		this.handy = handy;
 		this.shop = shop;
+		this.handy.setEmployee(this);
 	}
 	
 	/**
@@ -93,29 +94,26 @@ public class Employee extends Human {
 
 		int isReceiptNecessary = 0; // レシートが必要かフラグ
 		while (true) {
-			System.out.println(this.getName() + "「レシートはご利用になりますか？」　　0. いる  1. いらない");
+			System.out.println(this.getName() + "「レシートはご利用になりますか？」　　1. いる  0. いらない");
 			try {
 				isReceiptNecessary = scanner.nextInt(2);
 				break;
 			} catch (Exception e) {
 				System.out.println("(正しい数字で入力をしてください)");
 			}
-
 		}
 
 		switch (isReceiptNecessary) {
-		case 0:
+		case 1:
 			shop.getCashier().printReceipt(guest.getTable().getTableNumber(),this);
 			System.out.println(this.getName() + "「こちらレシートです。ありがとうございました。」");
 			break;
-		case 1:
+		case 0:
 			System.out.println(this.getName() + "「ありがとうございました。」");
 			break;
 		default:
 			break;
 		}
-		
-		
 		shop.getCashier().accountingEnd(guest);
 		return charge;
 	}

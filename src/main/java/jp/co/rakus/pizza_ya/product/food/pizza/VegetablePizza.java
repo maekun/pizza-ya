@@ -15,10 +15,10 @@ import jp.co.rakus.pizza_ya.product.food.topping.Tomato;
  */
 public class VegetablePizza extends Pizza {
 
-	public VegetablePizza(PizzayaCloth cloth, Sauce sauce) {
+	public VegetablePizza(Cloth cloth, Sauce sauce) {
 		super(cloth,sauce);
 		this.setName("野菜ピザ");
-		this.addToppings(new ArrayList<>(
+		this.setDefaultToppings(new ArrayList<>(
 				Arrays.asList(new Cheese(),new Tomato(),new Onion())));
 		setPriceByClothAndDefaultToppings(); 
 	}

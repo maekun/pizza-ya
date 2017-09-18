@@ -15,10 +15,10 @@ import jp.co.rakus.pizza_ya.product.food.topping.Squid;
  */
 public class SeafoodPizza extends Pizza {
 
-	public SeafoodPizza(PizzayaCloth cloth, Sauce sauce) {
+	public SeafoodPizza(Cloth cloth, Sauce sauce) {
 		super(cloth, sauce);
 		this.setName("シーフードピザ");
-		this.addToppings(new ArrayList<>(
+		this.setDefaultToppings(new ArrayList<>(
 				Arrays.asList(new Cheese(),new Shrimp(),new Squid())));
 		setPriceByClothAndDefaultToppings(); 
 	}
