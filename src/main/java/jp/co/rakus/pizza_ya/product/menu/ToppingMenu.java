@@ -1,7 +1,7 @@
 package jp.co.rakus.pizza_ya.product.menu;
 
 /**
- * 追加トッピングメニュー.
+ * 追加トッピングのメニューを表すEnumクラス.
  * @author hiroki.mae
  *
  */
@@ -36,7 +36,7 @@ public enum ToppingMenu {
 	/** トッピングメニューを開く.*/
 	public static void open() {
 		System.out.println("========================================");
-		System.out.println("【追加トッピングメニュー】\n");
+		System.out.println("【追加トッピングメニュー 各:¥200 】\n");
 		for (ToppingMenu topping : ToppingMenu.values()) {
 			System.out.println("ご注文No." + topping.getId() + ":【 " + topping.getName() + " 】"+ ": " + topping.getDescription());
 		}

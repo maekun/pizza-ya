@@ -31,12 +31,28 @@ public class Human {
 		System.out.println("入る店舗ナンバーを入力してください");
 		System.out.println("ピザーヤ");
 		System.out.println("1.ニューヨーク店 / 2.シカゴ店");
-		int selectedShopNumber = scanner.nextInt();
-		
-		if(selectedShopNumber == 1) {
+		int selectedShopNumber = 0;
+		while (true) {
+			try {
+				String strShopNumber = scanner.nextLine();
+				if("1".equals(strShopNumber) ||"１".equals(strShopNumber)) {
+					selectedShopNumber = 1; break;
+				}
+				if("2".equals(strShopNumber) ||"２".equals(strShopNumber)) {
+					selectedShopNumber = 2; break;
+				}
+				throw new Exception();
+			} catch (Exception e) {
+				System.out.println("正しい数字を選択してください。");
+				continue;
+			}
+		}
+		if( 1 == selectedShopNumber) {
 			return new PizzayaNewYork();
-		}else if(selectedShopNumber == 2) {
-			return new PizzayaChicago();}
+		}
+		if( 2 == selectedShopNumber) {
+			return new PizzayaChicago();
+		}
 		return null;
 	}
 	

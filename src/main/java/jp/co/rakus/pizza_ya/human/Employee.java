@@ -105,7 +105,8 @@ public class Employee extends Human {
 
 		switch (isReceiptNecessary) {
 		case 0:
-			System.out.println("こちらレシートです。ありがとうございました。//レシート内容未実装");
+			shop.getCashier().printReceipt(guest.getTable().getTableNumber(),this);
+			System.out.println("こちらレシートです。ありがとうございました。");
 			break;
 		case 1:
 			System.out.println("ありがとうございました。");
@@ -113,6 +114,9 @@ public class Employee extends Human {
 		default:
 			break;
 		}
+		
+		
+		shop.getCashier().accountingEnd(guest);
 		return charge;
 	}
 
@@ -136,5 +140,23 @@ public class Employee extends Human {
 	public void setGuest(Guest guest) {
 		this.guest = guest;
 	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	public Handy getHandy() {
+		return handy;
+	}
+
+	public void setHandy(Handy handy) {
+		this.handy = handy;
+	}
+	
+	
 
 }

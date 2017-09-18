@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import jp.co.rakus.pizza_ya.human.Employee;
+import jp.co.rakus.pizza_ya.human.Guest;
 import jp.co.rakus.pizza_ya.order.Order;
 import jp.co.rakus.pizza_ya.order.Slip;
 import jp.co.rakus.pizza_ya.product.food.Food;
@@ -84,9 +86,7 @@ public class Cashier {
 	
 	/**
 	 * 伝票を読み込み、合計金額を表示する.
-	 * 
-	 * @param slip
-	 *            伝票
+	 * @param slip 伝票
 	 * @return 合計金額
 	 */
 	public int showTotalPrice(Slip slip) {
@@ -97,22 +97,17 @@ public class Cashier {
 
 	/**
 	 * 精算する.
-	 * 
-	 * @param receiptAmount
-	 *            お預かり金額
+	 * @param receiptAmount お預かり金額
 	 * @return お釣り
 	 */
 	public int toAccount(int receiptAmount) {
 		int change = receiptAmount - this.totalPrice;
-		accountingEnd();
 		return change;
 	}
 
 	/**
 	 * 小計を算出する.
-	 * 
-	 * @param orders
-	 *            注文リスト
+	 * @param orders 注文リスト
 	 * @return 小計
 	 */
 	private int calcSubTotalPrice(List<Order> orders) {
@@ -129,21 +124,47 @@ public class Cashier {
 
 	/**
 	 * 税込金額を算出する(日本).
-	 * 
-	 * @param subTotalPrice
-	 *            小計
+	 * @param subTotalPrice 小計
 	 * @return 合計金額
 	 */
 	private int calcTotalPriceInJapan(int subTotalPrice) {
 		this.totalPrice = (int) (subTotalPrice * JAPAN_SALES_TAX);
 		return this.totalPrice;
 	}
+	// ピザの値段が日本円なので断念しました。。。
+	
+	// private double calcTotalPriceInChicago(double subTotalPrice) {
+	// //ここで小数点２位まで求めてリターンする
+	// return (int) (subTotalPrice * CHICAGO_SALES_TAX);
+	// }
+	// private double calcTotalPriceInNY(double subTotalPrice) {
+	// //ここで小数点２位まで求めてリターンする
+	// return (int) (subTotalPrice * NY_SALES_TAX);
+	// }
 
+	//プレイヤーにレシートとか持たせたかった。。。
+//	public Receipt printReceipt(int tableNumber) {
+//		Receipt receipt = new Receipt(orders.get(tableNumber));
+//	}
+	/**
+	 * レシートを発行して内容を確認する.
+	 * @param tableNumber 注文したテーブルの番号
+	 * @param employee 担当者
+	 */
+	public void printReceipt(int tableNumber, Employee employee) {
+		List<Order> orders = this.orders.get(tableNumber);
+		int subTotalPrice = calcSubTotalPrice(orders);
+		int totalPrice = calcTotalPriceInJapan(subTotalPrice);
+		Receipt receipt = new Receipt(employee, orders,subTotalPrice,totalPrice);
+		receipt.show();
+	}
+	
 	/** 売上計上する. */
-	private void accountingEnd() {
+	public void accountingEnd(Guest guest) {
 		setBalance(getBalance() + this.totalPrice);
 		this.subTotalPrice = 0;
 		this.totalPrice = 0;
+		orders.remove(guest.getTable().getTableNumber());
 	}
 
 	public int getBalance() {
@@ -154,15 +175,5 @@ public class Cashier {
 		this.balance = balance;
 	}
 
-	// ピザの値段が日本円なので断念しました。。。
-
-	// private double calcTotalPriceInChicago(double subTotalPrice) {
-	// //ここで小数点２位まで求めてリターンする
-	// return (int) (subTotalPrice * CHICAGO_SALES_TAX);
-	// }
-	// private double calcTotalPriceInNY(double subTotalPrice) {
-	// //ここで小数点２位まで求めてリターンする
-	// return (int) (subTotalPrice * NY_SALES_TAX);
-	// }
 
 }

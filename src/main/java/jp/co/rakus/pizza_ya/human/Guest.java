@@ -31,7 +31,7 @@ public class Guest extends Human {
 	/** お店に入ったら客になるコンストラクタ*/
 	public Guest(Human human) {
 		super(human.getName());
-		this.possessionMoney = new Random().nextInt(10000) + 20000;
+		this.possessionMoney = new Random().nextInt(10000) + 40000;
 	}
 	
 	/** 全てのメニューを見る*/
