@@ -21,7 +21,8 @@ import jp.co.rakus.pizza_ya.product.food.sauce.Sauce;
  */
 public abstract class Shop {
 	
-	
+	/** 店舗名*/
+	private String name;
 	/** 従業員*/
 	private List<Employee> employees;
 	/** ハンディ*/
@@ -40,14 +41,14 @@ public abstract class Shop {
 	
 	
 	/**
-	 * 入店してきたお客様をテーブルに着かせる.
+	 * お客様を迎え入れる
 	 * @param human 来店客
 	 * @return 客にしてリターン
 	 */
-	public Guest passTheTableToTheGuest(Human human) {
-		Table table = tables.get(0);
+	public Guest toGreetCustomers(Human human) {
 		Guest guest = new Guest(human);
-		guest.setTable(table);
+		Employee selectedEmployee = this.employeeIsChosen();
+		selectedEmployee.passTheTableToTheGuest(guest);
 		guest.setShop(this);
 		return guest;
 	}
@@ -127,6 +128,16 @@ public abstract class Shop {
 
 	public void setHandyList(List<Handy> handyList) {
 		this.handyList = handyList;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

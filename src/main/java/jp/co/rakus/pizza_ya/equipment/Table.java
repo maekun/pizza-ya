@@ -1,5 +1,8 @@
 package jp.co.rakus.pizza_ya.equipment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jp.co.rakus.pizza_ya.human.Guest;
 import jp.co.rakus.pizza_ya.order.Slip;
 import jp.co.rakus.pizza_ya.product.menu.PizzaMenu;
@@ -26,10 +29,11 @@ public class Table {
 	/** 備え付けのトッピングメニュー*/
 	private ToppingMenu toppingMenu;
 	/** 伝票*/
-	private Slip slip;
+	private List<Slip> slips;
 	
 	
 	public Table() {
+		slips = new ArrayList<>();
 		createdCount++;
 		this.guests = new Guest[MAX_HUMAN]; //４人席
 		this.tableNumber = createdCount;
@@ -37,6 +41,21 @@ public class Table {
 	public Table(int tableNumber) {
 		this.guests = new Guest[MAX_HUMAN]; //４人席
 		this.tableNumber = tableNumber;
+	}
+	
+	
+	/**
+	 * 追加伝票を受け付ける.
+	 * @param slip 追加伝票
+	 */
+	public void addSlip(Slip slip) { 
+		
+		for (Slip slip2 : slips) {
+			System.out.println(slip2.getOrderedPizzaList());
+		}
+		
+		this.slips.add(slip);
+		
 	}
 	
 	/** getter/setter*/
@@ -75,12 +94,13 @@ public class Table {
 	public void setTableNumber(int tableNumber) {
 		this.tableNumber = tableNumber;
 	}
-	public Slip getSlip() {
-		return slip;
+	public List<Slip> getSlip() {
+		return slips;
 	}
-	public void setSlip(Slip slip) {
-		this.slip = slip;
+	public void setSlip(List<Slip> slips) {
+		this.slips = slips;
 	}
+	
 	
 	
 }

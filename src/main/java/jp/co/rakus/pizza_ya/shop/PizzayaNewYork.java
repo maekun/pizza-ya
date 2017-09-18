@@ -6,10 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import jp.co.rakus.pizza_ya.equipment.Cashier;
+import jp.co.rakus.pizza_ya.equipment.Handy;
 import jp.co.rakus.pizza_ya.equipment.Table;
 import jp.co.rakus.pizza_ya.human.Employee;
-import jp.co.rakus.pizza_ya.human.Guest;
-import jp.co.rakus.pizza_ya.human.Human;
 import jp.co.rakus.pizza_ya.product.food.pizza.ThinCloth;
 import jp.co.rakus.pizza_ya.product.food.sauce.TomatoSauce;
 
@@ -24,32 +23,28 @@ public class PizzayaNewYork extends Shop{
 	private static Cashier cashier;
 	
 	public PizzayaNewYork() {
+		this.setName("ピザーヤ、ニューヨーク店");
 		cashier = new Cashier();
 		List<Table>tables = new ArrayList<>();
 		for (int i = 0; i < 16; i++) { tables.add(new Table()); }
 		this.setTables(tables);
 		
+		List<Handy> handyList = new ArrayList<>();
+		for (int i = 0; i < 16; i++) { handyList.add(new Handy(this)); }
+		this.setHandyList(handyList);
+		
 		List<Employee> employees = new ArrayList<>();
-		for (int i = 0; i < 16; i++) { employees.add(new Employee(this)); }
+		for (int i = 0; i < 16; i++) { employees.add(new Employee(this, this.getHandyList().get(i))); }
 		this.setEmployees(employees);
 		
 		this.setCloth(new ThinCloth());
 		this.setSauce(new TomatoSauce());
 	}
 	
-	@Override
-	public Guest passTheTableToTheGuest(Human human) {
-		System.out.println("いらっしゃいませ！　ピザーヤ、ニューヨーク店へようこそ！");
-		return super.passTheTableToTheGuest(human);
-	}
-
 	public Cashier getCashier() {
 		return cashier;
 	}
 
-	public void setCashier(Cashier cashier) {
-		this.cashier = cashier;
-	}
 	
 	
 }

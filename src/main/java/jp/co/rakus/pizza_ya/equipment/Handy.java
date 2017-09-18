@@ -3,7 +3,6 @@ package jp.co.rakus.pizza_ya.equipment;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.rakus.pizza_ya.order.Order;
@@ -22,50 +21,46 @@ import jp.co.rakus.pizza_ya.shop.Shop;
 @Service
 public class Handy {
 
+	/** 登録されている店舗*/
+	private Shop shop;
+	/** 接続しているレジ*/
 	private Cashier cashier;
 	
-	private Shop shop;
-	
 	/** 一回分の注文内容*/
-	private List<Food> orders = new ArrayList<>();
+	private List<Food> nowOrderList;
 	private Order order;
 	
 	public Handy(Shop shop) {
 		this.shop = shop;
+		this.cashier = shop.getCashier();
 	}
 	
 	/**
 	 * 注文を受け付ける.
 	 * @param tableNumber 注文が入るテーブル番号
+	 * @return 伝票
 	 */
-	public void startOrder(int tableNumber) {
+	public Slip startOrder(int tableNumber) {
 		
-		this.orders = new ArrayList<>();
+		this.nowOrderList = new ArrayList<>();
 		
 		Cloth cloth = shop.getCloth();
 		Sauce sauce = shop.getSauce();
 		
 	
 		
-		orders.add(new CheesePizza(cloth, sauce));
-		orders.add(new CheesePizza(cloth, sauce));
-		orders.add(new CheesePizza(cloth, sauce));
+		nowOrderList.add(new CheesePizza(cloth, sauce));
+		nowOrderList.add(new CheesePizza(cloth, sauce));
+		nowOrderList.add(new CheesePizza(cloth, sauce));
 		
 		
 		//ピザ選び終わったらオーダオブジェクトにする
-		this.order = new Order(tableNumber, this.orders);
+		this.order = new Order(tableNumber, this.nowOrderList);
 		
 		
-	}
-	
-	/**
-	 * 注文内容をレジに送信する.
-	 * @param order 注文内容
-	 * @return 伝票
-	 */
-	public Slip sendOrder(int tableNumber) {
 		cashier.addOrder(this.order);
-		this.orders = new ArrayList<>(); //送信後にクリア
+		this.nowOrderList = new ArrayList<>(); //送信後にクリア
 		return new Slip(this.order);
 	}
+	
 }

@@ -20,7 +20,7 @@ public class App {
 		
 		Human mae = new Human();
 		Shop selectedShop = mae.selectTheShop();
-		Guest guestMae = selectedShop.passTheTableToTheGuest(mae); //お店は客が入ってきたら持っている席を一つ客に割り振る
+		Guest guestMae = selectedShop.toGreetCustomers(mae); //お店は客が入ってきたら持っている席を一つ客に割り振る
 
 		
 		//レジ行くまで繰り返す
@@ -29,16 +29,20 @@ public class App {
 			switch (selectAction()) {
 			case 1: //メニュー見る
 				guestMae.viewMenu();
-				
 				break;
+				
 			case 2: //注文する
 				guestMae.order();
-				
 				break;
-			case 3: //所持金を確認する
+				
+			case 3: //伝票を確認する
+				guestMae.viewSlip();
+				break;
+				
+			case 4: //所持金を確認する
 				guestMae.showPossessionMoney();
-				
 				break;
+				
 			case 0: //レジへ向かう
 				guestMae.proceedToAccounting();
 				isContinue = false;
@@ -60,13 +64,14 @@ public class App {
 		System.out.println("(どうしますか？)");
 		System.out.println("1.メニューをみる");
 		System.out.println("2.注文する");
-		System.out.println("3.所持金を確認する");
+		System.out.println("3.伝票を確認する");
+		System.out.println("4.所持金を確認する");
 		System.out.println("0.レジへ向かう");
 		
 		int selectActionNumber = 0;
 		while (true) {
 			try {
-				selectActionNumber = new Scanner(System.in).nextInt(4);
+				selectActionNumber = new Scanner(System.in).nextInt(5);
 				break;
 			} catch (Exception e) {
 				System.out.println("正しい数字を選択してください。");

@@ -16,6 +16,7 @@ public class PepperoniiPizza extends Pizza {
 
 	public PepperoniiPizza(PizzayaCloth cloth, Sauce sauce) {
 		super(cloth,sauce);
+		this.setName("ペパロニピザ");
 		this.addToppings(new ArrayList<>(
 				Arrays.asList(new Cheese(),new Pepperoni())));
 	}

@@ -26,13 +26,16 @@ public abstract class Pizza implements Food {
 	private Cloth cloth;
 	/** 使用したソース*/
 	private Sauce sauce;
-	/** セットのトッピング*/
-	private List<Topping> toppings;
+	/** デフォルトのトッピング*/
+	private List<Topping> defaultToppings;
+	/** 追加のトッピング*/
+	private List<Topping> addToppings;
 
 	public Pizza(Cloth cloth, Sauce sauce) {
 		this.cloth = cloth;
 		this.sauce = sauce;
-		setToppings(new ArrayList<>());
+		setDefaultToppings(new ArrayList<>());
+		setAddToppings(new ArrayList<>());
 	}
 
 	
@@ -40,14 +43,14 @@ public abstract class Pizza implements Food {
 	 * 追加で単品トッピングを乗せる.
 	 * @param topping 追加トッピング
 	 */
-	public void addTopping(Topping topping) { this.toppings.add(topping); }
+	public void addTopping(Topping topping) { this.addToppings.add(topping); }
 	
 	/**
 	 * 追加で複数トッピングを乗せる.
 	 * @param toppings 追加トッピングのリスト
 	 */
 	public void addToppings(List<Topping> toppings) {
-		for (Topping topping : toppings) { this.toppings.add(topping); }
+		for (Topping topping : toppings) { this.addToppings.add(topping); }
 	}
 	
 	/**
@@ -55,11 +58,21 @@ public abstract class Pizza implements Food {
 	 * @return トッピング込みのピザ単品価格(税別)
 	 */
 	public int getSubTotalPrice() {
-		this.price += this.cloth.getPrice();
-		for (Topping topping : toppings) {
-			this.price += topping.getPrice();
+		int subTotalPrice = this.price;
+		for (Topping topping : addToppings) {
+			subTotalPrice += topping.getPrice();
 		}
-		return this.price;
+		return subTotalPrice;
+	}
+	
+	/** デフォルトの単品価格を自身にセットする*/
+	public void setPriceByClothAndDefaultToppings() {
+		int clothPrice = this.cloth.getPrice();
+		int toppingsPrice = 0 ;
+		for (Topping topping : defaultToppings) {
+			toppingsPrice += topping.getPrice();
+		}
+		setPrice( clothPrice + toppingsPrice);
 	}
 	
 	@Override
@@ -68,9 +81,6 @@ public abstract class Pizza implements Food {
 	}
 	
 	
-	public void setToppings(List<Topping> toppings) {
-		this.toppings = toppings;
-	}
 	
 	public String getName() {
 		return name;
@@ -110,8 +120,31 @@ public abstract class Pizza implements Food {
 
 	
 
-	public List<Topping> getToppings() {
-		return toppings;
+
+	
+
+	public List<Topping> getDefaultToppings() {
+		return defaultToppings;
+	}
+
+
+	public void setDefaultToppings(List<Topping> defaultToppings) {
+		this.defaultToppings = defaultToppings;
+	}
+
+
+	public List<Topping> getAddToppings() {
+		return addToppings;
+	}
+
+
+	public void setAddToppings(List<Topping> addToppings) {
+		this.addToppings = addToppings;
+	}
+
+
+	public void setCloth(Cloth cloth) {
+		this.cloth = cloth;
 	}
 
 

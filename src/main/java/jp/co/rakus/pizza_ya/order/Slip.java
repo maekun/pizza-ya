@@ -22,6 +22,22 @@ public class Slip {
 		this.orderedPizzaList = order.getOrderedPizzaList();
 	}
 	
+	/**
+	 * 伝票内容を表示する.
+	 * @return 伝票一枚あたりの小計
+	 */
+	public int showOrdered() {
+		int SubTotalPrice = 0;
+		for (Food food : orderedPizzaList) {
+			System.out.println(food.getName());
+			int subPrice = food.getSubTotalPrice();
+			SubTotalPrice += subPrice;
+			System.out.println("単品価格:" + subPrice + " 円");
+		}
+		System.out.println("====================");
+		System.out.println("小計:" + SubTotalPrice + " 円\n");
+		return SubTotalPrice;
+	}
 	
 	/** getter/setter */
 	public int getTableNumber() {

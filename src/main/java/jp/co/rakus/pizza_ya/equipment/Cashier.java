@@ -1,5 +1,7 @@
 package jp.co.rakus.pizza_ya.equipment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,23 +36,39 @@ public class Cashier {
 	private int totalPrice;
 
 	/** ハンディから受信した注文内容リスト */
-	private Map<Integer, List<Food>> orders;
+	private Map<Integer, List<Order>> orders;
 
 	public Cashier() {
 		this.setBalance(500000);
-		orders = new HashMap<Integer, List<Food>>();
+		orders = new HashMap<Integer, List<Order>>();
 	}
 
 	/**
 	 * ハンディからの注文内容を蓄積する.
 	 * 
 	 * @param order
-	 *            新規注文
+	 *            注文
 	 */
 	public void addOrder(Order order) {
-		this.orders.put(order.getTableNumber(), order.getOrderedPizzaList());
+		int tableNumber = order.getTableNumber();
+		
+		//すでに会計前の注文がある場合
+		if(this.orders.containsKey(tableNumber)) {
+			orders.get(tableNumber).add(order);
+		//初注文だった場合
+		}else {
+			this.orders.put(tableNumber, new ArrayList<>(Arrays.asList(order)));
+		}
 	}
 
+	/**
+	 * 注文内容を画面に出力する.
+	 * @param slip
+	 */
+	public void displayOrder(Slip slip) {
+		
+	}
+	
 	/**
 	 * 伝票を読み込み、合計金額を表示する.
 	 * 
@@ -60,7 +78,7 @@ public class Cashier {
 	 */
 	public int showTotalPrice(Slip slip) {
 		int tableNumber = slip.getTableNumber();
-		List<Food> orderedFoods = this.orders.get(tableNumber);
+		List<Order> orderedFoods = this.orders.get(tableNumber);
 		return calcTotalPriceInJapan(calcSubTotalPrice(orderedFoods));
 	}
 
@@ -80,15 +98,19 @@ public class Cashier {
 	/**
 	 * 小計を算出する.
 	 * 
-	 * @param orderedFoods
-	 *            注文商品リスト
+	 * @param orders
+	 *            注文リスト
 	 * @return 小計
 	 */
-	private int calcSubTotalPrice(List<Food> orderedFoods) {
+	private int calcSubTotalPrice(List<Order> orders) {
 		this.subTotalPrice = 0;
-		for (Food food : orderedFoods) {
-			subTotalPrice += food.getSubTotalPrice();
+		for (Order order : orders) {
+			for (Food food : order.getOrderedPizzaList()) {
+				subTotalPrice += food.getSubTotalPrice();
+			}
 		}
+		System.out.println("====================");
+		System.out.println("小計:" + subTotalPrice + " 円\n");
 		return subTotalPrice;
 	}
 

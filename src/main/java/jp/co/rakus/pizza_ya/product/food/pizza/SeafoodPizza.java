@@ -17,6 +17,7 @@ public class SeafoodPizza extends Pizza {
 
 	public SeafoodPizza(PizzayaCloth cloth, Sauce sauce) {
 		super(cloth, sauce);
+		this.setName("シーフードピザ");
 		this.addToppings(new ArrayList<>(
 				Arrays.asList(new Cheese(),new Shrimp(),new Squid())));
 	}

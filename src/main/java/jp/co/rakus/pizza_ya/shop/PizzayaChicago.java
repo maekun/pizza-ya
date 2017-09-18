@@ -7,8 +7,6 @@ import jp.co.rakus.pizza_ya.equipment.Cashier;
 import jp.co.rakus.pizza_ya.equipment.Handy;
 import jp.co.rakus.pizza_ya.equipment.Table;
 import jp.co.rakus.pizza_ya.human.Employee;
-import jp.co.rakus.pizza_ya.human.Guest;
-import jp.co.rakus.pizza_ya.human.Human;
 import jp.co.rakus.pizza_ya.product.food.pizza.ThickCloth;
 import jp.co.rakus.pizza_ya.product.food.sauce.MariaraSauce;
 
@@ -22,6 +20,8 @@ public class PizzayaChicago extends Shop {
 	private static Cashier cashier;
 	
 	public PizzayaChicago() {
+		
+		this.setName("ピザーヤ、シカゴ店");
 		cashier = new Cashier();
 		
 		List<Table>tables = new ArrayList<>();
@@ -30,28 +30,19 @@ public class PizzayaChicago extends Shop {
 		
 		List<Handy> handyList = new ArrayList<>();
 		for (int i = 0; i < 16; i++) { handyList.add(new Handy(this)); }
+		this.setHandyList(handyList);
 		
 		List<Employee> employees = new ArrayList<>();
-		for (int i = 0; i < 16; i++) { employees.add(new Employee(this)); }
+		for (int i = 0; i < 16; i++) { employees.add(new Employee(this, this.getHandyList().get(i))); }
 		this.setEmployees(employees);
 		
 		this.setCloth(new ThickCloth());
 		this.setSauce(new MariaraSauce());
-	}
-	
-	@Override
-	public Guest passTheTableToTheGuest(Human human) {
-		System.out.println("いらっしゃいませ！　ピザーヤ、シカゴ店へようこそ！");
-		return super.passTheTableToTheGuest(human);
 	}
 
 	public Cashier getCashier() {
 		return cashier;
 	}
 
-	public void setCashier(Cashier cashier) {
-		this.cashier = cashier;
-	}
-	
 	
 }

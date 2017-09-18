@@ -1,5 +1,6 @@
 package jp.co.rakus.pizza_ya.human;
 
+import java.util.List;
 import java.util.Scanner;
 
 import jp.co.rakus.pizza_ya.equipment.Table;
@@ -24,7 +25,7 @@ public class Guest extends Human {
 	/** 席に着いたテーブル*/
 	private Table table;
 	/** 注文内容の記載された伝票*/
-	private Slip slip;
+	private List<Slip> slips;
 	
 	public Guest() {
 		this.possessionMoney = 50000;
@@ -47,6 +48,17 @@ public class Guest extends Human {
 		Employee selectedEmployee = shop.employeeIsChosen();
 		selectedEmployee.receiveOrder(this);
 	}
+	/** 伝票を見る.*/
+	public void viewSlip() {
+		List<Slip> slips = table.getSlip();
+		int  subTotalPrice = 0 ;
+		if(0 == slips.size()) {
+			System.out.println("まだ注文していません。\n");
+		}else {
+			for (Slip slip : slips) { subTotalPrice += slip.showOrdered(); }
+		}
+		System.out.println("++++++++++++++++++++\n全伝票の総小計額 : " + subTotalPrice + " 円\n++++++++++++++++++++\n");
+	}
 	
 	/** 自身の所持金を確認する*/
 	public void showPossessionMoney() {
@@ -56,9 +68,19 @@ public class Guest extends Human {
 	
 	/** 会計へ進む.*/
 	public void proceedToAccounting() {
-		this.slip = this.table.getSlip(); //テーブルから伝票を取る
+		this.slips = this.table.getSlip(); //テーブルから伝票を取る
+		System.out.println("(テーブルから伝票を取り、レジへ向かう)");
+		for (int i = 0; i < 3; i++) {
+            try{
+                Thread.sleep(1000); 
+                System.out.print("スタ・・　");
+            }
+            catch(InterruptedException e){
+	            	System.out.print("スタ・・　");
+            }
+        }
 		Employee selectedEmployee = shop.employeeIsChosen();
-		selectedEmployee.toAccount(slip);
+		selectedEmployee.toAccount(slips);
 	}
 	
 	
@@ -78,12 +100,13 @@ public class Guest extends Human {
 		this.table = table;
 	}
 
-	public Slip getSlip() {
-		return slip;
+
+	public List<Slip> getSlips() {
+		return slips;
 	}
 
-	public void setSlip(Slip slip) {
-		this.slip = slip;
+	public void setSlips(List<Slip> slips) {
+		this.slips = slips;
 	}
 
 	public Shop getShop() {
