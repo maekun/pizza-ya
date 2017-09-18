@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import jp.co.rakus.pizza_ya.order.Order;
 import jp.co.rakus.pizza_ya.order.Slip;
-import jp.co.rakus.pizza_ya.product.food.Food;
 import jp.co.rakus.pizza_ya.product.food.pizza.CheesePizza;
 import jp.co.rakus.pizza_ya.product.food.pizza.Cloth;
+import jp.co.rakus.pizza_ya.product.food.pizza.Pizza;
 import jp.co.rakus.pizza_ya.product.food.sauce.Sauce;
 import jp.co.rakus.pizza_ya.shop.Shop;
 
@@ -27,7 +27,7 @@ public class Handy {
 	private Cashier cashier;
 	
 	/** 一回分の注文内容*/
-	private List<Food> nowOrderList;
+	private List<Pizza> nowOrderPizzaList;
 	private Order order;
 	
 	public Handy(Shop shop) {
@@ -42,24 +42,24 @@ public class Handy {
 	 */
 	public Slip startOrder(int tableNumber) {
 		
-		this.nowOrderList = new ArrayList<>();
+		this.nowOrderPizzaList = new ArrayList<>();
 		
 		Cloth cloth = shop.getCloth();
 		Sauce sauce = shop.getSauce();
 		
 	
 		
-		nowOrderList.add(new CheesePizza(cloth, sauce));
-		nowOrderList.add(new CheesePizza(cloth, sauce));
-		nowOrderList.add(new CheesePizza(cloth, sauce));
+		nowOrderPizzaList.add(new CheesePizza(cloth, sauce));
+		nowOrderPizzaList.add(new CheesePizza(cloth, sauce));
+		nowOrderPizzaList.add(new CheesePizza(cloth, sauce));
 		
 		
 		//ピザ選び終わったらオーダオブジェクトにする
-		this.order = new Order(tableNumber, this.nowOrderList);
+		this.order = new Order(tableNumber, this.nowOrderPizzaList);
 		
 		
 		cashier.addOrder(this.order);
-		this.nowOrderList = new ArrayList<>(); //送信後にクリア
+		this.nowOrderPizzaList = new ArrayList<>(); //送信後にクリア
 		return new Slip(this.order);
 	}
 	

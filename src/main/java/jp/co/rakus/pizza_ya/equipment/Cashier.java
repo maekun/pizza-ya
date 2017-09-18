@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import jp.co.rakus.pizza_ya.order.Order;
 import jp.co.rakus.pizza_ya.order.Slip;
 import jp.co.rakus.pizza_ya.product.food.Food;
+import jp.co.rakus.pizza_ya.product.food.pizza.Pizza;
+import jp.co.rakus.pizza_ya.product.food.topping.Topping;
 
 /**
  * レジを表すサービスクラス.
@@ -62,11 +64,22 @@ public class Cashier {
 	}
 
 	/**
-	 * 注文内容を画面に出力する.
-	 * @param slip
+	 * 伝票を読み込み、注文内容を画面に出力する.
+	 * @param slip 伝票
 	 */
 	public void displayOrder(Slip slip) {
-		
+		List<Order> orders = this.orders.get(slip.getTableNumber());
+		for (Order order : orders) {
+			
+			for ( Pizza pizza : order.getOrderedPizzaList()) {
+				System.out.println( pizza.getName() + " 単品 : " + pizza.getPrice() + " 円");
+				
+				for ( Topping topping : pizza.getAddToppings()) {
+					System.out.println(topping.getName() + " 単品 : " + topping.getPrice() + " 円");
+				}
+				System.out.println("--------------------\n単品小計 : " + pizza.getSubTotalPrice() + " 円\n--------------------");
+			}
+		}
 	}
 	
 	/**
@@ -78,8 +91,8 @@ public class Cashier {
 	 */
 	public int showTotalPrice(Slip slip) {
 		int tableNumber = slip.getTableNumber();
-		List<Order> orderedFoods = this.orders.get(tableNumber);
-		return calcTotalPriceInJapan(calcSubTotalPrice(orderedFoods));
+		List<Order> orders = this.orders.get(tableNumber);
+		return calcTotalPriceInJapan(calcSubTotalPrice(orders));
 	}
 
 	/**

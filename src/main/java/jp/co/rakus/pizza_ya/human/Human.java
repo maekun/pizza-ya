@@ -19,12 +19,8 @@ public class Human {
 	/** 名前*/
 	private String name ;
 	
-	public Human() {
-		
-	}
-	
 	public Human(String name) {
-		this.name = name;
+		setName(name);
 	}
 	
 	/**

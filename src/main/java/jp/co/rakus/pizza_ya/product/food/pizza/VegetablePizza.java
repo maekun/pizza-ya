@@ -20,6 +20,7 @@ public class VegetablePizza extends Pizza {
 		this.setName("野菜ピザ");
 		this.addToppings(new ArrayList<>(
 				Arrays.asList(new Cheese(),new Tomato(),new Onion())));
+		setPriceByClothAndDefaultToppings(); 
 	}
 
 }

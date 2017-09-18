@@ -3,6 +3,7 @@ package jp.co.rakus.pizza_ya.order;
 import java.util.List;
 
 import jp.co.rakus.pizza_ya.product.food.Food;
+import jp.co.rakus.pizza_ya.product.food.pizza.Pizza;
 
 /**
  * 伝票を表すクラス.
@@ -15,7 +16,7 @@ public class Slip {
 	private int tableNumber;
 	//TODO:ピザのリスト自体はオーダーオブジェクトの中にあるから伝票からは消すか？それとも注文内容を客が伝票から確認できるようにするために残すか？
 	/** 注文されていたピザ*/
-	private List<Food> orderedPizzaList;
+	private List<Pizza> orderedPizzaList;
 	
 	public Slip(Order order) {
 		this.tableNumber = order.getTableNumber();
@@ -46,10 +47,12 @@ public class Slip {
 	public void setTableNumber(int tableNumber) {
 		this.tableNumber = tableNumber;
 	}
-	public List<Food> getOrderedPizzaList() {
+
+	public List<Pizza> getOrderedPizzaList() {
 		return orderedPizzaList;
 	}
-	public void setOrderedPizzaList(List<Food> orderedPizzaList) {
+
+	public void setOrderedPizzaList(List<Pizza> orderedPizzaList) {
 		this.orderedPizzaList = orderedPizzaList;
 	}
 	

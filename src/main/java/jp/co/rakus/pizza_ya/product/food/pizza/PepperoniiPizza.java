@@ -19,5 +19,6 @@ public class PepperoniiPizza extends Pizza {
 		this.setName("ペパロニピザ");
 		this.addToppings(new ArrayList<>(
 				Arrays.asList(new Cheese(),new Pepperoni())));
+		setPriceByClothAndDefaultToppings(); 
 	}
 }
