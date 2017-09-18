@@ -50,7 +50,7 @@ public class Guest extends Human {
 		List<Slip> slips = table.getSlip();
 		int  subTotalPrice = 0 ;
 		if(0 == slips.size()) {
-			System.out.println("まだ注文していません。\n");
+			System.out.println("(まだ何も注文していません。)\n\n");
 		}else {
 			for (Slip slip : slips) { subTotalPrice += slip.showOrdered(); }
 		}
@@ -63,21 +63,26 @@ public class Guest extends Human {
 		System.out.println("現在の所持金 : " + this.possessionMoney + " 円");
 	}
 	
-	/** 会計へ進む.*/
-	public void proceedToAccounting() {
+	/** 会計へ進む.(未注文なら戻る)*/
+	public void proceedToAccounting() throws Exception{
 		this.slips = this.table.getSlip(); //テーブルから伝票を取る
-		System.out.println("(テーブルから伝票を取り、レジへ向かう)");
-		for (int i = 0; i < 3; i++) {
-            try{
-                Thread.sleep(1000); 
-                System.out.print("スタ・・　");
-            }
-            catch(InterruptedException e){
-	            	System.out.print("スタ・・　");
-            }
-        }
-		Employee selectedEmployee = shop.employeeIsChosen();
-		selectedEmployee.toAccount(this);
+		if( 0 == slips.size() ) {
+			System.out.println("(まだ何も注文していません。)\n\n");
+			throw new Exception();
+		}else {
+			System.out.println("(テーブルから伝票を取り、レジへ向かう)");
+			for (int i = 0; i < 3; i++) {
+				try{
+					Thread.sleep(1000); 
+					System.out.print("スタ・・　");
+				}
+				catch(InterruptedException e){
+					System.out.print("スタ・・　");
+				}
+			}
+			Employee selectedEmployee = shop.employeeIsChosen();
+			selectedEmployee.toAccount(this);
+		}
 	}
 	
 	/**

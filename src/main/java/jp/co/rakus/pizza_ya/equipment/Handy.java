@@ -61,7 +61,7 @@ public class Handy {
 
 		while (true) {
 			Pizza pizza = selectPizza();
-			
+			System.out.println(this.employee.getName() + "「" + pizza.getName() + " ですね。」");
 			System.out.println(this.employee.getName() + "「追加のトッピングはいかがですか？」　　1. いる  0. いらない");
 			String selectNumber = "";
 			while (true) {

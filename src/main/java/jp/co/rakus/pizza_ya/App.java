@@ -37,9 +37,13 @@ public class App {
 			case 4: //所持金を確認する
 				guestMae.showPossessionMoney(); break;
 			case 0: //レジへ向かう
-				guestMae.proceedToAccounting();
-				isContinue = false;
-				break;
+				try {
+					guestMae.proceedToAccounting();
+					isContinue = false;
+					break;
+				} catch (Exception e) {
+					continue;
+				}
 			default:
 				break;
 			}
@@ -53,7 +57,7 @@ public class App {
 	private static int selectAction() {
 		System.out.println("(どうしますか？)");
 		System.out.println("1.メニューをみる");
-		System.out.println("2.注文する");
+		System.out.println("2.店員を呼んで注文する");
 		System.out.println("3.伝票を確認する");
 		System.out.println("4.所持金を確認する");
 		System.out.println("0.レジへ向かう");

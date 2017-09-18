@@ -2,8 +2,8 @@ package jp.co.rakus.pizza_ya.order;
 
 import java.util.List;
 
-import jp.co.rakus.pizza_ya.product.food.Food;
 import jp.co.rakus.pizza_ya.product.food.pizza.Pizza;
+import jp.co.rakus.pizza_ya.product.food.topping.Topping;
 
 /**
  * 伝票を表すクラス.
@@ -28,16 +28,23 @@ public class Slip {
 	 * @return 伝票一枚あたりの小計
 	 */
 	public int showOrdered() {
-		int SubTotalPrice = 0;
-		for (Food food : orderedPizzaList) {
-			System.out.println(food.getName());
-			int subPrice = food.getSubTotalPrice();
-			SubTotalPrice += subPrice;
-			System.out.println("単品価格:" + subPrice + " 円");
+		int subTotalPrice = 0;
+		System.out.println("========================================\n                [伝票]\n========================================");
+		for (Pizza pizza : orderedPizzaList) {
+			System.out.println(pizza.getName() + "   " + pizza.getPrice() + " 円");
+			
+			//トッピング一つごと
+			for (Topping topping : pizza.getAddToppings()) {
+				System.out.println("[" + topping.getName() + " 追加トッピング単品 :価格 " + topping.getPrice() + " 円 ]");
+			}
+			subTotalPrice += pizza.getSubTotalPrice();
+			System.out.println(
+					"- - - - - - - - - - - - - - - - - - - - \n                    単品小計 : " + pizza.getSubTotalPrice() + " 円\n----------------------------------------");
 		}
-		System.out.println("====================");
-		System.out.println("小計:" + SubTotalPrice + " 円\n");
-		return SubTotalPrice;
+		System.out.println("++++++++++");
+		System.out.println("小計:" + subTotalPrice + " 円\n");
+		System.out.println("++++++++++\n\n");
+		return subTotalPrice;
 	}
 	
 	/** getter/setter */

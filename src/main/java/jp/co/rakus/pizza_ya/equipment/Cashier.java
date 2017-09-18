@@ -96,7 +96,7 @@ public class Cashier {
 					System.out.println("[" + topping.getName() + " 追加トッピング単品 :価格 " + topping.getPrice() + " 円 ]");
 				}
 				System.out.println(
-						"- - - - - - - - - - - - - - - - - - - - \n                    単品小計 : " + pizza.getSubTotalPrice() + " 円\n----------------------------------------");
+						"- - - - - - - - - - - - - - - - - - - - \n                    単品小計 : " + pizza.getSubTotalPrice() + " 円\n--------------------------------------");
 			}
 		}
 	}
@@ -114,7 +114,7 @@ public class Cashier {
 		int subTotalPrice = calcSubTotalPrice(orders);
 		int totalPrice = calcTotalPriceInJapan(subTotalPrice);
 		System.out.println("========================================");
-		System.out.println("                        小計 : " + subTotalPrice + " 円\n");
+		System.out.println("                        小計 : " + subTotalPrice + " 円");
 		System.out.println("                        合計 : " + totalPrice + " 円\n");
 		return totalPrice;
 	}

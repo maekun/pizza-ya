@@ -52,7 +52,6 @@ public class Receipt {
 		System.out.println("来店日時 : " + formatter.format(dateOfPayment));
 		System.out.println("担当店員 : " + employeeName);
 		System.out.println("注文内容 : ");
-		System.out.println("-----------------------------------------------");
 		printOrders(orders);
 		
 		System.out.println("===============================================");
@@ -74,11 +73,12 @@ public class Receipt {
 
 			//ピザ一枚ごと
 			for (Pizza pizza : order.getOrderedPizzaList()) {
+				System.out.println(" - - - - - - - - - - - - - - - - - - - - - - - ");
 				System.out.println(pizza.getName() + "   " + pizza.getPrice() + " 円");
 				
 				//トッピング一つごと
 				for (Topping topping : pizza.getAddToppings()) {
-					System.out.println("[" + topping.getName() + " 追加トッピング単品 :価格 " + topping.getPrice() + " 円 ]");
+					System.out.println("          [" + topping.getName() + " 追加トッピング単品 :価格 " + topping.getPrice() + " 円 ]");
 				}
 			}
 		}
