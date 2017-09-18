@@ -25,7 +25,6 @@ public enum ToppingMenu {
 	/** 特徴の説明*/
 	private final String description;
 	
-	
 	private ToppingMenu(int id, String name, String price, String description) { 
 		this.id = id ; 
 		this.name = name;
@@ -42,7 +41,9 @@ public enum ToppingMenu {
 		}
 		System.out.println("========================================");
 	}
+
 	
+	/** getter/setter */
 	public int getId() { return this.id; }
 	public String getName(){ return this.name; }
 	public String getPrice(){ return this.price; }

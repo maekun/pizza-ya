@@ -41,8 +41,8 @@ public class Employee extends Human {
 	 */
 	public Guest passTheTableToTheGuest(Guest guest) {
 		Table table = shop.getTables().get(new Random().nextInt(16));
-		System.out.println("いらっしゃいませ！　" + this.shop.getName() + "へようこそ！");
-		System.out.println(table.getTableNumber() + "番テーブルへご案内させていただきます。");
+		System.out.println(this.getName() + "「いらっしゃいませ！　" + this.shop.getName() + "へようこそ！」");
+		System.out.println(this.getName() + "「" + table.getTableNumber() + "番テーブルへご案内させていただきます。」");
 		guest.setTable(table); // お客さんをテーブルにつかせる
 		return guest;
 	}
@@ -56,14 +56,14 @@ public class Employee extends Human {
 		int tableNumber = guest.getTable().getTableNumber();
 
 		// メニューを客に見せて注文をwhile文で受け付ける
-		System.out.println("ご注文をお伺いします。");
+		System.out.println(this.getName() + "「ご注文をお伺いします。」");
 		// ハンディを使用し、レジに注文送信
 		Slip newSlip = handy.startOrder(tableNumber);
 
-		System.out.println("ご注文承りました。");
+		System.out.println(this.getName() + "「ご注文承りました。」");
 		// 伝票をテーブルに置く
 		guest.getTable().addSlip(newSlip);
-		System.out.println("お会計の際はこちらの伝票をレジまでお持ちください。");
+		System.out.println(this.getName() + "「お会計の際はこちらの伝票をレジまでお持ちください。」");
 	}
 
 	/**
@@ -74,26 +74,26 @@ public class Employee extends Human {
 	public int toAccount(Guest guest) {
 		this.guest = guest;
 		Slip slip = this.guest.getSlips().get(0);
-		System.out.println("伝票お預かりいたします。");
+		System.out.println("\n" + this.getName() + "「伝票お預かりいたします。」\n\n\n");
 		shop.getCashier().displayOrder(slip);
 		int totalPrice = shop.getCashier().showTotalPrice(slip);
-		System.out.println("お客様のお支払金額は税込 " + totalPrice + " 円です。");
+		System.out.println(this.getName() + "「お客様のお支払金額は税込 " + totalPrice + " 円です。」");
 
 		int receiptAmount = this.guest.payBillAmount(totalPrice);
 
 		int charge = 0;
 		if (receiptAmount == totalPrice) {
-			System.out.println(totalPrice + " 円、ちょうどお預かりいたします。");
+			System.out.println(this.getName() + "「" +  totalPrice + " 円、ちょうどお預かりいたします。」");
 		} else {
-			System.out.println(receiptAmount + " 円お預かりいたします。");
+			System.out.println(this.getName() + "「" + receiptAmount + " 円お預かりいたします。」");
 			charge = shop.getCashier().toAccount(receiptAmount);
-			System.out.println(charge + " 円のお返しです。");
+			System.out.println(this.getName() + "「" + charge + " 円のお返しです。」");
 			this.guest.toGetMoney(charge); // お釣りを渡す
 		}
 
 		int isReceiptNecessary = 0; // レシートが必要かフラグ
 		while (true) {
-			System.out.println("レシートはご利用になりますか？　　0. いる  1. いらない");
+			System.out.println(this.getName() + "「レシートはご利用になりますか？」　　0. いる  1. いらない");
 			try {
 				isReceiptNecessary = scanner.nextInt(2);
 				break;
@@ -106,10 +106,10 @@ public class Employee extends Human {
 		switch (isReceiptNecessary) {
 		case 0:
 			shop.getCashier().printReceipt(guest.getTable().getTableNumber(),this);
-			System.out.println("こちらレシートです。ありがとうございました。");
+			System.out.println(this.getName() + "「こちらレシートです。ありがとうございました。」");
 			break;
 		case 1:
-			System.out.println("ありがとうございました。");
+			System.out.println(this.getName() + "「ありがとうございました。」");
 			break;
 		default:
 			break;
@@ -128,7 +128,7 @@ public class Employee extends Human {
 	 */
 	private static String randomName() {
 		List<String> names = new ArrayList<>(
-				Arrays.asList("猪狩","金子","神山","佐藤","佐藤","大地","中野","本間","松本","村井","八尋","吉野","吐愚痴","寺田さん","伊賀さん"));
+				Arrays.asList("猪狩","金子","神山","佐藤(男)","佐藤(女)","大地","中野","本間","松本","村井","八尋","吉野","吐愚痴","寺田さん","伊賀さん"));
 		return names.get(new Random().nextInt(15));
 	}
 	

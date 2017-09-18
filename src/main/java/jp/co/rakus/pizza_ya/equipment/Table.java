@@ -48,15 +48,7 @@ public class Table {
 	 * 追加伝票を受け付ける.
 	 * @param slip 追加伝票
 	 */
-	public void addSlip(Slip slip) { 
-		
-		for (Slip slip2 : slips) {
-			System.out.println(slip2.getOrderedPizzaList());
-		}
-		
-		this.slips.add(slip);
-		
-	}
+	public void addSlip(Slip slip) { this.slips.add(slip); }
 	
 	/** getter/setter*/
 	public Guest[] getGuests() {

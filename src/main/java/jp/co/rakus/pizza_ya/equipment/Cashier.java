@@ -1,5 +1,6 @@
 package jp.co.rakus.pizza_ya.equipment;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -55,49 +56,74 @@ public class Cashier {
 	 */
 	public void addOrder(Order order) {
 		int tableNumber = order.getTableNumber();
-		
-		//すでに会計前の注文がある場合
-		if(this.orders.containsKey(tableNumber)) {
+
+		// すでに会計前の注文がある場合
+		if (this.orders.containsKey(tableNumber)) {
 			orders.get(tableNumber).add(order);
-		//初注文だった場合
-		}else {
+			// 初注文だった場合
+		} else {
 			this.orders.put(tableNumber, new ArrayList<>(Arrays.asList(order)));
 		}
 	}
 
 	/**
 	 * 伝票を読み込み、注文内容を画面に出力する.
-	 * @param slip 伝票
+	 * 
+	 * @param slip
+	 *            伝票
 	 */
 	public void displayOrder(Slip slip) {
 		List<Order> orders = this.orders.get(slip.getTableNumber());
+		printOrders(orders);
+	}
+
+	/**
+	 * 注文リストを詳細に画面表示する.
+	 * 
+	 * @param orders
+	 *            注文リスト
+	 */
+	public void printOrders(List<Order> orders) {
+		System.out.println("【ご注文内容確認画面】\n----------------------------------------");
 		for (Order order : orders) {
-			
-			for ( Pizza pizza : order.getOrderedPizzaList()) {
-				System.out.println( pizza.getName() + " 単品 : " + pizza.getPrice() + " 円");
+
+			//ピザ一枚ごと
+			for (Pizza pizza : order.getOrderedPizzaList()) {
+				System.out.println(pizza.getName() + "   " + pizza.getPrice() + " 円");
 				
-				for ( Topping topping : pizza.getAddToppings()) {
-					System.out.println(topping.getName() + " 単品 : " + topping.getPrice() + " 円");
+				//トッピング一つごと
+				for (Topping topping : pizza.getAddToppings()) {
+					System.out.println("[" + topping.getName() + " 追加トッピング単品 :価格 " + topping.getPrice() + " 円 ]");
 				}
-				System.out.println("--------------------\n単品小計 : " + pizza.getSubTotalPrice() + " 円\n--------------------");
+				System.out.println(
+						"- - - - - - - - - - - - - - - - - - - - \n                    単品小計 : " + pizza.getSubTotalPrice() + " 円\n----------------------------------------");
 			}
 		}
 	}
-	
+
 	/**
 	 * 伝票を読み込み、合計金額を表示する.
-	 * @param slip 伝票
+	 * 
+	 * @param slip
+	 *            伝票
 	 * @return 合計金額
 	 */
 	public int showTotalPrice(Slip slip) {
 		int tableNumber = slip.getTableNumber();
 		List<Order> orders = this.orders.get(tableNumber);
-		return calcTotalPriceInJapan(calcSubTotalPrice(orders));
+		int subTotalPrice = calcSubTotalPrice(orders);
+		int totalPrice = calcTotalPriceInJapan(subTotalPrice);
+		System.out.println("========================================");
+		System.out.println("                        小計 : " + subTotalPrice + " 円\n");
+		System.out.println("                        合計 : " + totalPrice + " 円\n");
+		return totalPrice;
 	}
 
 	/**
 	 * 精算する.
-	 * @param receiptAmount お預かり金額
+	 * 
+	 * @param receiptAmount
+	 *            お預かり金額
 	 * @return お釣り
 	 */
 	public int toAccount(int receiptAmount) {
@@ -107,7 +133,9 @@ public class Cashier {
 
 	/**
 	 * 小計を算出する.
-	 * @param orders 注文リスト
+	 * 
+	 * @param orders
+	 *            注文リスト
 	 * @return 小計
 	 */
 	private int calcSubTotalPrice(List<Order> orders) {
@@ -117,14 +145,14 @@ public class Cashier {
 				subTotalPrice += food.getSubTotalPrice();
 			}
 		}
-		System.out.println("====================");
-		System.out.println("小計:" + subTotalPrice + " 円\n");
 		return subTotalPrice;
 	}
 
 	/**
 	 * 税込金額を算出する(日本).
-	 * @param subTotalPrice 小計
+	 * 
+	 * @param subTotalPrice
+	 *            小計
 	 * @return 合計金額
 	 */
 	private int calcTotalPriceInJapan(int subTotalPrice) {
@@ -132,7 +160,7 @@ public class Cashier {
 		return this.totalPrice;
 	}
 	// ピザの値段が日本円なので断念しました。。。
-	
+
 	// private double calcTotalPriceInChicago(double subTotalPrice) {
 	// //ここで小数点２位まで求めてリターンする
 	// return (int) (subTotalPrice * CHICAGO_SALES_TAX);
@@ -142,23 +170,26 @@ public class Cashier {
 	// return (int) (subTotalPrice * NY_SALES_TAX);
 	// }
 
-	//プレイヤーにレシートとか持たせたかった。。。
-//	public Receipt printReceipt(int tableNumber) {
-//		Receipt receipt = new Receipt(orders.get(tableNumber));
-//	}
+	// プレイヤーにレシートとか持たせたかった。。。
+	// public Receipt printReceipt(int tableNumber) {
+	// Receipt receipt = new Receipt(orders.get(tableNumber));
+	// }
 	/**
 	 * レシートを発行して内容を確認する.
-	 * @param tableNumber 注文したテーブルの番号
-	 * @param employee 担当者
+	 * 
+	 * @param tableNumber
+	 *            注文したテーブルの番号
+	 * @param employee
+	 *            担当者
 	 */
 	public void printReceipt(int tableNumber, Employee employee) {
 		List<Order> orders = this.orders.get(tableNumber);
 		int subTotalPrice = calcSubTotalPrice(orders);
 		int totalPrice = calcTotalPriceInJapan(subTotalPrice);
-		Receipt receipt = new Receipt(employee, orders,subTotalPrice,totalPrice);
+		Receipt receipt = new Receipt(employee, orders, subTotalPrice, totalPrice);
 		receipt.show();
 	}
-	
+
 	/** 売上計上する. */
 	public void accountingEnd(Guest guest) {
 		setBalance(getBalance() + this.totalPrice);
@@ -174,6 +205,5 @@ public class Cashier {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
-
 
 }

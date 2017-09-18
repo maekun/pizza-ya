@@ -6,6 +6,8 @@ import java.util.List;
 
 import jp.co.rakus.pizza_ya.human.Employee;
 import jp.co.rakus.pizza_ya.order.Order;
+import jp.co.rakus.pizza_ya.product.food.pizza.Pizza;
+import jp.co.rakus.pizza_ya.product.food.topping.Topping;
 
 /**
  * レシートを表すクラス.
@@ -44,20 +46,42 @@ public class Receipt {
 	 * レシートの内容を確認する.
 	 */
 	public void show() {
-		System.out.println("-----------------------------------------------");
+		System.out.println("\n\n\n\n\n-----------------------------------------------");
 		System.out.println("********* 【 "+ this.shopName + " 】 *********");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y年M月d日 HH:mm:ss");
 		System.out.println("来店日時 : " + formatter.format(dateOfPayment));
 		System.out.println("担当店員 : " + employeeName);
 		System.out.println("注文内容 : ");
-		
-		
-		System.out.println("====================");
-		System.out.println("小計金額 : " + this.subTotalPrice + " 円");
-		System.out.println("合計金額 : " + this.totalPrice + " 円");
-		System.out.println("====================\n");
-		System.out.println("**********またのご来店、おまちしております**********");
 		System.out.println("-----------------------------------------------");
+		printOrders(orders);
+		
+		System.out.println("===============================================");
+		System.out.println("                               小計金額 : " + this.subTotalPrice + " 円");
+		System.out.println("                               合計金額 : " + this.totalPrice + " 円");
+		System.out.println("===============================================\n");
+		System.out.println("**********またのご来店、おまちしております**********");
+		System.out.println("-----------------------------------------------\n\n\n");
+	}
+	
+	/**
+	 * 注文リストを詳細に画面表示する.
+	 * 
+	 * @param orders
+	 *            注文リスト
+	 */
+	private void printOrders(List<Order> orders) {
+		for (Order order : orders) {
+
+			//ピザ一枚ごと
+			for (Pizza pizza : order.getOrderedPizzaList()) {
+				System.out.println(pizza.getName() + "   " + pizza.getPrice() + " 円");
+				
+				//トッピング一つごと
+				for (Topping topping : pizza.getAddToppings()) {
+					System.out.println("[" + topping.getName() + " 追加トッピング単品 :価格 " + topping.getPrice() + " 円 ]");
+				}
+			}
+		}
 	}
 
 	
