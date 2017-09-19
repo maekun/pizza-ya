@@ -7,8 +7,8 @@ import jp.co.rakus.pizza_ya.equipment.Cashier;
 import jp.co.rakus.pizza_ya.equipment.Handy;
 import jp.co.rakus.pizza_ya.equipment.Table;
 import jp.co.rakus.pizza_ya.human.Employee;
-import jp.co.rakus.pizza_ya.product.food.pizza.ThickCloth;
-import jp.co.rakus.pizza_ya.product.food.sauce.MariaraSauce;
+import jp.co.rakus.pizza_ya.product.food.pizza.ThinCloth;
+import jp.co.rakus.pizza_ya.product.food.sauce.TomatoSauce;
 
 /**
  * ピザーヤのシカゴ店を表すクラス.
@@ -21,11 +21,10 @@ public class PizzayaChicago extends Shop {
 	
 	public PizzayaChicago() {
 
-		this.setCloth(new ThickCloth());
-		this.setSauce(new MariaraSauce());
-		
 		this.setName("ピザーヤ、シカゴ店");
 		cashier = new Cashier();
+		this.setCloth(new ThinCloth());
+		this.setSauce(new TomatoSauce());
 		
 		List<Table>tables = new ArrayList<>();
 		for (int i = 0; i < 16; i++) { tables.add(new Table()); }
