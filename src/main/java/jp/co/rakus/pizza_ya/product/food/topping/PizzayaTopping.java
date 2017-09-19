@@ -1,5 +1,10 @@
 package jp.co.rakus.pizza_ya.product.food.topping;
 
+/**
+ * ピザーヤのトッピングを表すクラス.
+ * @author hiroki.mae
+ *
+ */
 public abstract class PizzayaTopping extends Topping {
 	
 	/** トッピング名*/
@@ -11,10 +16,7 @@ public abstract class PizzayaTopping extends Topping {
 	/** 腐っているか判定するフラグ*/
 	private boolean isRotten;
 
-	
-	public PizzayaTopping() {
-		// TODO Auto-generated constructor stub
-	}
+	public PizzayaTopping() {}
 
 	@Override
 	public void rot() { this.isRotten = true ; }

@@ -31,15 +31,17 @@ public abstract class Pizza implements Food {
 	/** 追加のトッピング*/
 	private List<Topping> addToppings;
 	
-
-	
+	/**
+	 * ピザのコンストラクタ.
+	 * @param cloth 生地
+	 * @param sauce ピザソース
+	 */
 	public Pizza(Cloth cloth, Sauce sauce) {
 		this.cloth = cloth;
 		this.sauce = sauce;
 		setDefaultToppings(new ArrayList<>());
 		setAddToppings(new ArrayList<>());
 	}
-
 	
 	/**
 	 * 追加で単品トッピングを乗せる.

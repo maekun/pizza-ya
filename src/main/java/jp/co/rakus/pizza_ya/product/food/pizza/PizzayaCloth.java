@@ -16,14 +16,10 @@ public abstract class PizzayaCloth extends Cloth {
 	/** 腐っているか判定するフラグ*/
 	private boolean isRotten;
 	
-	
-	public PizzayaCloth() {
-	}
-	
-
 	@Override
 	public void rot() { this.isRotten = true ; }
 
+	
 	/** getter/setter*/
 	@Override
 	public String getName() {return this.name;}

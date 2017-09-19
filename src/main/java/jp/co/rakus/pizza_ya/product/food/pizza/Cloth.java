@@ -18,9 +18,8 @@ public abstract class Cloth implements Food {
 	/** 腐っているか判定するフラグ*/
 	private boolean isRotten;
 	
-	public Cloth() {
-		this.isRotten = false;
-	}
+	/** コンストラクタ*/
+	public Cloth() { this.isRotten = false; }
 
 	@Override
 	public void rot() { this.isRotten = true ; }

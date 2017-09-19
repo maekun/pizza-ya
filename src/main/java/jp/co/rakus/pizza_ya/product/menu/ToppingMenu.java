@@ -25,6 +25,7 @@ public enum ToppingMenu {
 	/** 特徴の説明*/
 	private final String description;
 	
+	/** コンストラクタ*/
 	private ToppingMenu(int id, String name, String price, String description) { 
 		this.id = id ; 
 		this.name = name;

@@ -1,6 +1,5 @@
 package jp.co.rakus.pizza_ya.product.food.topping;
 
-
 /**
  * チーズトッピングを表すクラス.
  * @author hiroki.mae

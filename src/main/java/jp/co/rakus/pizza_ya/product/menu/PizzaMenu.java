@@ -25,7 +25,7 @@ public enum PizzaMenu {
 	/** デフォルトトッピング内容*/
 	private final String toppingsDescription;
 	
-	
+	/** コンストラクタ*/
 	private PizzaMenu(int id, String name, String price, String toppingsDescription) { 
 		this.id = id ; 
 		this.name = name;

@@ -12,9 +12,7 @@ public abstract class Sauce {
 	/** 特徴*/
 	private String description;
 	
-	public Sauce() {
-		
-	}
+	/** getter/setter */
 	public String getName() {
 		return name;
 	}

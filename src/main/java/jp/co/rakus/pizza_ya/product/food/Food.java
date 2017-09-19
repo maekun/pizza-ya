@@ -9,7 +9,6 @@ import jp.co.rakus.pizza_ya.product.Product;
  *
  */
 public interface Food extends FoodStuff, Product {
-
 	/** 単品の税別価格を取得する.*/
 	public int getSubTotalPrice();
 }

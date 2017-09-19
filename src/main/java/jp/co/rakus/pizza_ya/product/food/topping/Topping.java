@@ -13,6 +13,7 @@ public abstract class Topping implements Food {
 	/** 腐っているか判定するフラグ*/
 	private boolean isRotten;
 	
+	/** コンストラクタ*/
 	public Topping() {
 		this.isRotten = false;
 	}

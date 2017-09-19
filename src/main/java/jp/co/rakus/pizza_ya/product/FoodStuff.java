@@ -7,15 +7,15 @@ package jp.co.rakus.pizza_ya.product;
  */
 public interface FoodStuff {
 
-	/**
-	 * 腐る.
-	 */
+	/** 腐る.*/
 	void rot() ;
 	
-	String getName();
 	/**
 	 * 腐っているか確認する.
 	 * @return 腐っていればtrue/腐っていなければfalse
 	 */
 	boolean isRotten();
+	
+	
+	String getName();
 }
