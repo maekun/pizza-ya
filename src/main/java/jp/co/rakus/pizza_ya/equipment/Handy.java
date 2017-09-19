@@ -91,6 +91,7 @@ public class Handy {
 		//ピザ選び終わったらオーダオブジェクトにする
 		this.order = new Order(tableNumber, this.nowOrderPizzaList);
 		
+		//レジに注文内容を飛ばす
 		cashier.addOrder(this.order);
 		this.nowOrderPizzaList = new ArrayList<>(); //送信後にクリア
 		return new Slip(this.order);

@@ -20,6 +20,9 @@ public class PizzayaChicago extends Shop {
 	private static Cashier cashier;
 	
 	public PizzayaChicago() {
+
+		this.setCloth(new ThickCloth());
+		this.setSauce(new MariaraSauce());
 		
 		this.setName("ピザーヤ、シカゴ店");
 		cashier = new Cashier();
@@ -36,8 +39,6 @@ public class PizzayaChicago extends Shop {
 		for (int i = 0; i < 16; i++) { employees.add(new Employee(this, this.getHandyList().get(i))); }
 		this.setEmployees(employees);
 		
-		this.setCloth(new ThickCloth());
-		this.setSauce(new MariaraSauce());
 	}
 
 	public Cashier getCashier() {

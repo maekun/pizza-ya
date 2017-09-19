@@ -29,7 +29,7 @@ public class Slip {
 	 */
 	public int showOrdered() {
 		int subTotalPrice = 0;
-		System.out.println("========================================\n                [伝票]\n========================================");
+		System.out.println("========================================\n                 [伝票]\n========================================");
 		for (Pizza pizza : orderedPizzaList) {
 			System.out.println(pizza.getName() + "   " + pizza.getPrice() + " 円");
 			
@@ -39,11 +39,12 @@ public class Slip {
 			}
 			subTotalPrice += pizza.getSubTotalPrice();
 			System.out.println(
-					"- - - - - - - - - - - - - - - - - - - - \n                    単品小計 : " + pizza.getSubTotalPrice() + " 円\n----------------------------------------");
+					"- - - - - - - - - - - - - - - - - - - - \n                        単品小計 : " + pizza.getSubTotalPrice() + " 円\n----------------------------------------");
 		}
-		System.out.println("++++++++++");
-		System.out.println("小計:" + subTotalPrice + " 円\n");
-		System.out.println("++++++++++\n\n");
+		System.out.println("========================================\n                [伝票]\n========================================");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("                           小計:" + subTotalPrice + " 円");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++\n\n");
 		return subTotalPrice;
 	}
 	
