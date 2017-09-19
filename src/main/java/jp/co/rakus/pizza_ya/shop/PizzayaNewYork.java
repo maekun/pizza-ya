@@ -3,8 +3,6 @@ package jp.co.rakus.pizza_ya.shop;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import jp.co.rakus.pizza_ya.equipment.Cashier;
 import jp.co.rakus.pizza_ya.equipment.Handy;
 import jp.co.rakus.pizza_ya.equipment.Table;
@@ -17,7 +15,6 @@ import jp.co.rakus.pizza_ya.product.food.sauce.TomatoSauce;
  * @author hiroki.mae
  *
  */
-@Component
 public class PizzayaNewYork extends Shop{
 	
 	private static Cashier cashier;

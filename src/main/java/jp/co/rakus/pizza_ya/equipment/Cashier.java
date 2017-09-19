@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
-
 import jp.co.rakus.pizza_ya.human.Employee;
 import jp.co.rakus.pizza_ya.human.Guest;
 import jp.co.rakus.pizza_ya.order.Order;
@@ -23,7 +21,6 @@ import jp.co.rakus.pizza_ya.product.food.topping.Topping;
  * @author hiroki.mae
  *
  */
-@Service
 public class Cashier {
 
 	/** 2017/09/17現在の日本の消費税率(8%) */

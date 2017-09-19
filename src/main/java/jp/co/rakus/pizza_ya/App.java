@@ -13,8 +13,13 @@ import jp.co.rakus.pizza_ya.shop.Shop;
  *
  */
 public class App {
-	
 	static Scanner scanner = new Scanner(System.in);
+	
+	//本質として必要な抽象クラスのみ作ればよい
+	//選択肢で分岐させるときはマップに詰めてキーを選択肢のナンバーとして使う
+	//入力値チェック等は専用のクラスを作成して切り出してあげる
+	//（Validationクラスとか使ってやるといま入力値チェックしているんだな。と見てわかるので後で見返しやすい)
+	
 	
 	public static void main(String[] args) {
 		
@@ -22,13 +27,6 @@ public class App {
 		Human player = new Human(scanner.nextLine());
 		Shop selectedShop = player.selectTheShop();
 		Guest guest = selectedShop.toGreetCustomers(player); //お店は客が入ってきたら持っている席を一つ客に割り振る
-		
-		
-		//本質として必要な抽象クラスのみ作ればよい
-		//選択肢で分岐させるときはマップに詰めてキーを選択肢のナンバーとして使う
-		//入力値チェック等は専用のクラスを作成して切り出してあげる
-		//（Validationクラスとか使ってやるといま入力値チェックしているんだな。と見てわかるので後で見返しやすい)
-		
 		
 		//レジ行くまで繰り返す
 		boolean isContinue = true;
@@ -62,13 +60,8 @@ public class App {
 	 * @return 行動の番号
 	 */
 	private static int selectAction() {
-		System.out.println("(どうしますか？)");
-		System.out.println("1.メニューをみる");
-		System.out.println("2.店員を呼んで注文する");
-		System.out.println("3.伝票を確認する");
-		System.out.println("4.所持金を確認する");
-		System.out.println("0.レジへ向かう");
-		
+		System.out.println("\n(どうしますか？)\n1.メニューをみる\n2.店員を呼んで注文する\n"
+						+ 	"3.伝票を確認する\n4.所持金を確認する\n0.レジへ向かう\n");
 		int selectActionNumber = 0;
 		while (true) {
 			try {

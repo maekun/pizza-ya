@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.springframework.stereotype.Service;
-
 import jp.co.rakus.pizza_ya.human.Employee;
 import jp.co.rakus.pizza_ya.order.Order;
 import jp.co.rakus.pizza_ya.order.Slip;
@@ -30,7 +28,6 @@ import jp.co.rakus.pizza_ya.shop.Shop;
  * @author hiroki.mae
  *
  */
-@Service
 public class Handy {
 	
 	Scanner scanner = new Scanner(System.in);
