@@ -16,7 +16,6 @@ import jp.co.rakus.pizza_ya.shop.Shop;
  *
  */
 public class Guest extends Human {
-	
 	Scanner scanner = new Scanner(System.in);
 	
 	/** 入ったお店*/
@@ -35,33 +34,25 @@ public class Guest extends Human {
 	}
 	
 	/** 全てのメニューを見る*/
-	public void viewMenu() {
-		PizzaMenu.open();
-		ToppingMenu.open();
-	}
+	public void viewMenu() { PizzaMenu.open(); ToppingMenu.open();}
 	
 	/** 店員を呼んで注文する.*/
 	public void order() {
 		Employee selectedEmployee = shop.employeeIsChosen();
 		selectedEmployee.receiveOrder(this);
 	}
-	/** 伝票を確認する.*/
+	
+	/** テーブルの伝票を確認する.*/
 	public void viewSlip() {
-		List<Slip> slips = table.getSlip();
 		int  subTotalPrice = 0 ;
-		if(0 == slips.size()) {
-			System.out.println("(まだ何も注文していません。)\n\n");
-		}else {
-			for (Slip slip : slips) { subTotalPrice += slip.showOrdered(); }
-		}
+		if(0 == slips.size()) System.out.println("(まだ何も注文していません。)\n\n");
+		else for (Slip slip : table.getSlip()) { subTotalPrice += slip.showOrdered();}
 		System.out.println("++++++++++++++++++++\n全伝票の総小計額 : " + subTotalPrice + " 円\n++++++++++++++++++++\n");
 	}
 	
 	/** 自身の所持金を確認する*/
 	public void showPossessionMoney() {
-		//所持金を確認する振る舞いを実行する
-		System.out.println("現在の所持金 : " + this.possessionMoney + " 円");
-	}
+		System.out.println("現在の所持金 : " + this.possessionMoney + " 円");}
 	
 	/** 会計へ進む.(未注文なら戻る)*/
 	public void proceedToAccounting() throws Exception{
@@ -74,11 +65,9 @@ public class Guest extends Human {
 			for (int i = 0; i < 3; i++) {
 				try{
 					Thread.sleep(1000); 
-					System.out.print("スタ・・　");
-				}
+					System.out.print("スタ・・　");}
 				catch(InterruptedException e){
-					System.out.print("スタ・・　");
-				}
+					System.out.print("スタ・・　");}
 			}
 			Employee selectedEmployee = shop.employeeIsChosen();
 			selectedEmployee.toAccount(this);
@@ -86,7 +75,7 @@ public class Guest extends Human {
 	}
 	
 	/**
-	 * 請求額を支払う.
+	 * 請求された額を支払う.
 	 * @param billingAmount 請求額
 	 * @return 請求に対して渡すお金
 	 */

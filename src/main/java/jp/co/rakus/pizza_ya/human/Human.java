@@ -12,13 +12,15 @@ import jp.co.rakus.pizza_ya.shop.Shop;
  *
  */
 public class Human {
-	
 	Scanner scanner = new Scanner(System.in);
-	
 	
 	/** 名前*/
 	private String name ;
 	
+	/**
+	 * 名前を受け取るコンストラクタ.
+	 * @param name 
+	 */
 	public Human(String name) {
 		setName(name);
 	}
@@ -36,24 +38,18 @@ public class Human {
 			try {
 				String strShopNumber = scanner.nextLine();
 				if("1".equals(strShopNumber) ||"１".equals(strShopNumber)) {
-					selectedShopNumber = 1; break;
-				}
+					selectedShopNumber = 1; break;}
 				if("2".equals(strShopNumber) ||"２".equals(strShopNumber)) {
-					selectedShopNumber = 2; break;
-				}
+					selectedShopNumber = 2; break;}
 				throw new Exception();
 			} catch (Exception e) {
 				System.out.println("正しい数字を選択してください。");
 				continue;
 			}
 		}
-		if( 1 == selectedShopNumber) {
-			return new PizzayaNewYork();
-		}
-		if( 2 == selectedShopNumber) {
-			return new PizzayaChicago();
-		}
-		return null;
+		if( 1 == selectedShopNumber) return new PizzayaNewYork();
+		if( 2 == selectedShopNumber) return new PizzayaChicago();
+		else return null;
 	}
 	
 	/** getter/setter */

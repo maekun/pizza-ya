@@ -58,23 +58,24 @@ public class Employee extends Human {
 
 		// メニューを客に見せて注文をwhile文で受け付ける
 		System.out.println(this.getName() + "「ご注文をお伺いします。」");
+		
 		// ハンディを使用し、レジに注文送信
 		Slip newSlip = handy.startOrder(tableNumber);
-
 		System.out.println(this.getName() + "「ご注文承りました。」");
+	
 		// 伝票をテーブルに置く
 		guest.getTable().addSlip(newSlip);
 		System.out.println(this.getName() + "「お会計の際はこちらの伝票をレジまでお持ちください。」");
 	}
 
 	/**
-	 * 客から伝票を受け取りお会計対応する.
+	 * お会計対応する.
 	 * @param slip 伝票
 	 * @return お釣り
 	 */
 	public int toAccount(Guest guest) {
 		this.guest = guest;
-		Slip slip = this.guest.getSlips().get(0);
+		Slip slip = guest.getSlips().get(0);
 		System.out.println("\n" + this.getName() + "「伝票お預かりいたします。」\n\n\n");
 		shop.getCashier().displayOrder(slip);
 		int totalPrice = shop.getCashier().showTotalPrice(slip);
@@ -117,8 +118,6 @@ public class Employee extends Human {
 		shop.getCashier().accountingEnd(guest);
 		return charge;
 	}
-
-	
 	/**
 	 * 店員名をランダムセレクト<br>
 	 * 世の中、同じ名前の人はいるのであえて名前がかぶる設計.
@@ -154,7 +153,5 @@ public class Employee extends Human {
 	public void setHandy(Handy handy) {
 		this.handy = handy;
 	}
-	
-	
 
 }
