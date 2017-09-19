@@ -43,6 +43,7 @@ public class Handy {
 	private Employee employee;
 	/** 一回分の注文内容*/
 	private List<Pizza> nowOrderPizzaList;
+	/** */
 	private Order order;
 	
 	public Handy(Shop shop) {
@@ -61,8 +62,8 @@ public class Handy {
 
 		while (true) {
 			Pizza pizza = selectPizza();
-			System.out.println(this.employee.getName() + "「" + pizza.getName() + " ですね。」");
-			System.out.println(this.employee.getName() + "「追加のトッピングはいかがですか？」　　1. いる  0. いらない");
+				System.out.println(this.employee.getName() + "「" + pizza.getName() + " ですね。」");
+				System.out.println(this.employee.getName() + "「追加のトッピングはいかがですか？」　　1. いる  0. いらない");
 			String selectNumber = "";
 			while (true) {
 				selectNumber = scanner.nextLine();
@@ -72,7 +73,7 @@ public class Handy {
 				System.out.println("正しく入力してください");
 			}
 			
-			
+			//トッピングの受け終わったピザをハンディ内に蓄積
 			nowOrderPizzaList.add(pizza);
 			
 			selectNumber = "";
@@ -85,8 +86,6 @@ public class Handy {
 			}
 			if("1".equals(selectNumber) || "１".equals(selectNumber)) { continue;}
 			if("0".equals(selectNumber) || "０".equals(selectNumber)) { break; }
-			
-			
 		}
 		//ピザ選び終わったらオーダオブジェクトにする
 		this.order = new Order(tableNumber, this.nowOrderPizzaList);

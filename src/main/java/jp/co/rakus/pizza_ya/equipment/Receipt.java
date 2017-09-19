@@ -32,9 +32,10 @@ public class Receipt {
 
 	/**
 	 * レシートを作成する.
-	 * 
-	 * @param orders
-	 *            注文リスト
+	 * @param employee　担当店員
+	 * @param orders 注文内容
+	 * @param subTotalPrice 小計
+	 * @param totalPrice 合計
 	 */
 	public Receipt(Employee employee, List<Order> orders, int subTotalPrice, int totalPrice) {
 		this.shopName = employee.getShop().getName();
@@ -56,7 +57,6 @@ public class Receipt {
 		System.out.println("担当店員 : " + employeeName);
 		System.out.println("注文内容 : ");
 		printOrders(orders);
-
 		System.out.println("===============================================");
 		System.out.println("                             小計金額 : " + this.subTotalPrice + " 円");
 		System.out.println("                             合計金額 : " + this.totalPrice + " 円");
@@ -66,19 +66,15 @@ public class Receipt {
 	}
 
 	/**
-	 * 注文リストを詳細に画面表示する.
-	 * 
-	 * @param orders
-	 *            注文リスト
+	 * 注文内容を詳細に画面表示する.
+	 * @param orders 注文リスト
 	 */
 	private void printOrders(List<Order> orders) {
 		for (Order order : orders) {
-
 			// ピザ一枚ごと
 			for (Pizza pizza : order.getOrderedPizzaList()) {
 				System.out.println(" - - - - - - - - - - - - - - - - - - - - - - - ");
 				System.out.println(pizza.getName() + "   " + pizza.getPrice() + " 円");
-
 				// トッピング一つごと
 				for (Topping topping : pizza.getAddToppings()) {
 					System.out.println(

@@ -11,5 +11,4 @@ public class MariaraSauce extends Sauce {
 		this.setName("マリナーラソース");
 		this.setDescription("マリナーラ感があって美味しい");
 	}
-
 }

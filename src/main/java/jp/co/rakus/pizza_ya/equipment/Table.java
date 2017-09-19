@@ -15,8 +15,8 @@ import jp.co.rakus.pizza_ya.product.menu.ToppingMenu;
  */
 public class Table {
 	
-	/** 生成されたテーブルの数*/
-	private int createdCount;
+	/** 生成されたテーブルの合計数*/
+	private static int createdCount;
 
 	/** 席ナンバー*/
 	private int tableNumber;
@@ -30,17 +30,13 @@ public class Table {
 	private ToppingMenu toppingMenu;
 	/** 伝票*/
 	private List<Slip> slips;
-	
-	
+
+	/** コンストラクタ*/
 	public Table() {
 		slips = new ArrayList<>();
 		createdCount++;
 		this.guests = new Guest[MAX_HUMAN]; //４人席
 		this.tableNumber = createdCount;
-	}
-	public Table(int tableNumber) {
-		this.guests = new Guest[MAX_HUMAN]; //４人席
-		this.tableNumber = tableNumber;
 	}
 	
 	/**
