@@ -5,7 +5,7 @@ import java.util.List;
 import jp.co.rakus.pizza_ya.product.food.pizza.Pizza;
 
 /**
- * 注文内容を表すクラス.
+ * 注文を表すクラス.
  * @author hiroki.mae
  *
  */
@@ -16,6 +16,11 @@ public class Order {
 	/** 注文されていたピザ*/
 	private List<Pizza> orderedPizzaList;
 	
+	/**
+	 * コンストラクタ.
+	 * @param tableNumber　テーブル番号
+	 * @param orderedPizzaList　注文内容
+	 */
 	public Order(int tableNumber, List<Pizza> orderedPizzaList) {
 		this.tableNumber = tableNumber;
 		this.orderedPizzaList = orderedPizzaList;

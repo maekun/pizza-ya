@@ -15,6 +15,7 @@ public class Slip {
 	/** 注文を受けたテーブルの番号*/
 	private int tableNumber;
 	//TODO:ピザのリスト自体はオーダーオブジェクトの中にあるから伝票からは消すか？それとも注文内容を客が伝票から確認できるようにするために残すか？
+	
 	/** 注文されていたピザ*/
 	private List<Pizza> orderedPizzaList;
 	
