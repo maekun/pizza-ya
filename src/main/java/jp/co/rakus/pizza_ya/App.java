@@ -49,8 +49,7 @@ public class App {
 				} catch (Exception e) {
 					continue;
 				}
-			default:
-				break;
+			default: break;
 			}
 		}
 	}

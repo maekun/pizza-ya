@@ -45,7 +45,7 @@ public class Guest extends Human {
 	/** テーブルの伝票を確認する.*/
 	public void viewSlip() {
 		int  subTotalPrice = 0 ;
-		if(0 == slips.size()) System.out.println("(まだ何も注文していません。)\n\n");
+		if(null == slips) System.out.println("(まだ何も注文していません。)\n\n");
 		else for (Slip slip : table.getSlip()) { subTotalPrice += slip.showOrdered();}
 		System.out.println("++++++++++++++++++++\n全伝票の総小計額 : " + subTotalPrice + " 円\n++++++++++++++++++++\n");
 	}
